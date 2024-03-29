@@ -1,0 +1,38 @@
+[
+ {
+  "appraisal_template": null,
+  "description": null,
+  "designation_name": "AGRI.OVERSIER",
+  "docstatus": 0,
+  "doctype": "Designation",
+  "modified": "2024-03-20 13:43:51.528314",
+  "name": "AGRI.OVERSIER",
+  "off_season_rate": 60.0,
+  "season_rate": 100.0,
+  "skills": []
+ },
+ {
+  "appraisal_template": null,
+  "description": null,
+  "designation_name": "FIELD MAN",
+  "docstatus": 0,
+  "doctype": "Designation",
+  "modified": "2024-02-28 11:25:04.698016",
+  "name": "FIELD MAN",
+  "off_season_rate": 60.0,
+  "season_rate": 100.0,
+  "skills": []
+ },
+ {
+  "appraisal_template": null,
+  "description": null,
+  "designation_name": "SLIP BOY",
+  "docstatus": 0,
+  "doctype": "Designation",
+  "modified": "2024-02-28 11:22:16.942890",
+  "name": "SLIP BOY",
+  "off_season_rate": 50.0,
+  "season_rate": 100.0,
+  "skills": []
+ }
+]

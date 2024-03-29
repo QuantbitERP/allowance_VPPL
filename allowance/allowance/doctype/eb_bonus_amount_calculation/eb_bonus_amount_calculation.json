@@ -1,0 +1,89 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-09 16:27:21.079503",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_id",
+  "employee_name",
+  "employee_type",
+  "bonus_percentage",
+  "previous_total_amount",
+  "total_bonus_amount",
+  "from_date",
+  "to_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee Id",
+   "options": "Employee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "employee_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Employee Type",
+   "options": "Working\nRetired",
+   "read_only": 1
+  },
+  {
+   "fieldname": "bonus_percentage",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Bonus Percentage",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "previous_total_amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Previous Total Amount",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_bonus_amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Bonus Amount",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-03-12 14:57:53.336822",
+ "modified_by": "Administrator",
+ "module": "Allowance",
+ "name": "EB Bonus Amount Calculation",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

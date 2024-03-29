@@ -1,0 +1,112 @@
+[
+ {
+  "currency": "INR",
+  "default_base_pay": 0.0,
+  "default_salary_structure": null,
+  "docstatus": 0,
+  "doctype": "Employee Grade",
+  "modified": "2023-07-03 12:33:06.591866",
+  "name": "CLERICAL I",
+  "retention_percentage": 55.5
+ },
+ {
+  "currency": "INR",
+  "default_base_pay": 0.0,
+  "default_salary_structure": null,
+  "docstatus": 0,
+  "doctype": "Employee Grade",
+  "modified": "2023-07-03 12:33:06.582558",
+  "name": "CLERICAL II",
+  "retention_percentage": 55.5
+ },
+ {
+  "currency": "INR",
+  "default_base_pay": 0.0,
+  "default_salary_structure": null,
+  "docstatus": 0,
+  "doctype": "Employee Grade",
+  "modified": "2023-07-03 12:33:06.390834",
+  "name": "CLERICAL III",
+  "retention_percentage": 55.5
+ },
+ {
+  "currency": "INR",
+  "default_base_pay": 0.0,
+  "default_salary_structure": null,
+  "docstatus": 0,
+  "doctype": "Employee Grade",
+  "modified": "2023-07-03 12:33:06.573261",
+  "name": "CLIRICAL IV",
+  "retention_percentage": 55.5
+ },
+ {
+  "currency": "INR",
+  "default_base_pay": 0.0,
+  "default_salary_structure": null,
+  "docstatus": 0,
+  "doctype": "Employee Grade",
+  "modified": "2023-07-03 12:33:48.920825",
+  "name": "SEMISKILLED",
+  "retention_percentage": 48.5
+ },
+ {
+  "currency": "INR",
+  "default_base_pay": 0.0,
+  "default_salary_structure": null,
+  "docstatus": 0,
+  "doctype": "Employee Grade",
+  "modified": "2023-07-03 12:33:06.533186",
+  "name": "SKILLED A",
+  "retention_percentage": 55.5
+ },
+ {
+  "currency": "INR",
+  "default_base_pay": 0.0,
+  "default_salary_structure": null,
+  "docstatus": 0,
+  "doctype": "Employee Grade",
+  "modified": "2023-07-03 12:33:06.522726",
+  "name": "SKILLED B",
+  "retention_percentage": 55.5
+ },
+ {
+  "currency": "INR",
+  "default_base_pay": 0.0,
+  "default_salary_structure": null,
+  "docstatus": 0,
+  "doctype": "Employee Grade",
+  "modified": "2023-07-03 12:33:06.512023",
+  "name": "SUPERVISORY A",
+  "retention_percentage": 55.5
+ },
+ {
+  "currency": "INR",
+  "default_base_pay": 0.0,
+  "default_salary_structure": null,
+  "docstatus": 0,
+  "doctype": "Employee Grade",
+  "modified": "2023-07-03 12:33:06.501192",
+  "name": "SUPERVISORY B",
+  "retention_percentage": 55.5
+ },
+ {
+  "currency": "INR",
+  "default_base_pay": 0.0,
+  "default_salary_structure": null,
+  "docstatus": 0,
+  "doctype": "Employee Grade",
+  "modified": "2023-07-03 12:33:06.489450",
+  "name": "SUPERVISORY C",
+  "retention_percentage": 55.5
+ },
+ {
+  "currency": "INR",
+  "default_base_pay": 0.0,
+  "default_salary_structure": null,
+  "docstatus": 0,
+  "doctype": "Employee Grade",
+  "modified": "2023-07-03 12:33:25.581652",
+  "name": "UNSKILLED",
+  "retention_percentage": 38.5
+ }
+]

@@ -1,0 +1,112 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{year}-{month}",
+ "creation": "2024-02-28 10:52:29.720576",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "season",
+  "company",
+  "branch",
+  "rate",
+  "column_break_ce3du",
+  "date",
+  "month",
+  "year",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "season",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Season",
+   "options": "Season For Payroll",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Rate(Per Liter)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ce3du",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Month ",
+   "read_only": 1
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Data",
+   "label": "Year",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Petrol Rate",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-03-18 14:26:59.587241",
+ "modified_by": "Administrator",
+ "module": "Allowance",
+ "name": "Petrol Rate",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

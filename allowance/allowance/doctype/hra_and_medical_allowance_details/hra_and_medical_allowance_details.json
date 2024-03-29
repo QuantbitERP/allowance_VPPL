@@ -1,0 +1,213 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-06-01 14:20:24.564372",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "grade",
+  "present_days",
+  "column_break_5u7nf",
+  "employee_name",
+  "retention_days",
+  "out_duty_days",
+  "section_break_fnlsl",
+  "basic",
+  "medical_allowance",
+  "hra",
+  "hra_deduction",
+  "fixed_allowance",
+  "column_break_dwuvp",
+  "petrol_allowance",
+  "overtime_value",
+  "bonus_amount",
+  "personal_pay",
+  "dearness_allowance",
+  "additional_allowance_section",
+  "maintenance_amount",
+  "bhatta_amount",
+  "column_break_zgoon",
+  "special_allowance",
+  "telephone_bhatta",
+  "start_date",
+  "end_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fieldname": "medical_allowance",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Medical Allowance"
+  },
+  {
+   "fieldname": "hra",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "HRA"
+  },
+  {
+   "fieldname": "retention_days",
+   "fieldtype": "Float",
+   "label": "Retention Days"
+  },
+  {
+   "fieldname": "grade",
+   "fieldtype": "Data",
+   "label": "Grade"
+  },
+  {
+   "fieldname": "basic",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Basic"
+  },
+  {
+   "fieldname": "personal_pay",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Personal Pay"
+  },
+  {
+   "fieldname": "dearness_allowance",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Dearness Allowance"
+  },
+  {
+   "fieldname": "fixed_allowance",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Fixed Allowance"
+  },
+  {
+   "fieldname": "petrol_allowance",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Petrol Allowance",
+   "precision": "2"
+  },
+  {
+   "fieldname": "bonus_amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Bonus Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_5u7nf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_fnlsl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_dwuvp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "overtime_value",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Overtime Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "hra_deduction",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "HRA Deduction",
+   "precision": "2"
+  },
+  {
+   "fieldname": "present_days",
+   "fieldtype": "Float",
+   "label": "Present Days",
+   "precision": "2"
+  },
+  {
+   "fieldname": "additional_allowance_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Allowance"
+  },
+  {
+   "fieldname": "maintenance_amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Maintenance Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "bhatta_amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Bhatta Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_zgoon",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "special_allowance",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Special Allowance",
+   "precision": "2"
+  },
+  {
+   "fieldname": "telephone_bhatta",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Telephone Bhatta",
+   "precision": "2"
+  },
+  {
+   "fieldname": "out_duty_days",
+   "fieldtype": "Float",
+   "label": "Out Duty Days",
+   "precision": "2"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Start Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "End Date",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-03-19 15:58:14.379707",
+ "modified_by": "Administrator",
+ "module": "Allowance",
+ "name": "HRA and Medical Allowance Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

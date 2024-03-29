@@ -1,0 +1,133 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:HRA-MA - {date} - {####}",
+ "creation": "2023-06-01 14:14:25.279462",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "from_date",
+  "company",
+  "column_break_uwwlm",
+  "date",
+  "branch",
+  "column_break_p4hjk",
+  "month",
+  "column_break_d4exi",
+  "year",
+  "hra_and_medical_allowance_details_section",
+  "get_details",
+  "hra_and_medical_allowance_details",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "get_details",
+   "fieldtype": "Button",
+   "label": "Get Details"
+  },
+  {
+   "fieldname": "hra_and_medical_allowance_details_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "hra_and_medical_allowance_details",
+   "fieldtype": "Table",
+   "label": "Allowance Details",
+   "options": "HRA and Medical Allowance Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_uwwlm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_p4hjk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Data",
+   "label": "Month",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_d4exi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Data",
+   "label": "Year",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Branch",
+   "options": "Branch",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Allowance Calculation",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-03-18 15:51:48.255320",
+ "modified_by": "Administrator",
+ "module": "Allowance",
+ "name": "Allowance Calculation",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

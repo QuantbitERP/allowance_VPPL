@@ -1,0 +1,198 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:EB-{month}-{year}-{##}",
+ "creation": "2024-03-09 14:25:41.742581",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "bonus_apply_date",
+  "company",
+  "column_break_ykdaw",
+  "month",
+  "branch",
+  "column_break_kmwn6",
+  "year",
+  "previous_year_salary_slip_details_section",
+  "from_date",
+  "column_break_y1kud",
+  "to_date",
+  "section_break_p8mht",
+  "working_employee_bonus_",
+  "column_break_wjvrr",
+  "retired_employee_bonus_",
+  "section_break_fjaz0",
+  "section_break_wk89c",
+  "component_details",
+  "check_all",
+  "employee_list",
+  "get_bonus",
+  "bonus_calculation",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "bonus_apply_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Salary Date For Bonus Process",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ykdaw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Month",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_kmwn6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Data",
+   "label": "Year",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "description": "Please select the date from which the total amount for bonus calculation will be taken from the salary slip.",
+   "fieldname": "previous_year_salary_slip_details_section",
+   "fieldtype": "Section Break",
+   "label": "Previous Year Salary Slip Details"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_y1kud",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_p8mht",
+   "fieldtype": "Section Break",
+   "label": "Bonus Percentage"
+  },
+  {
+   "fieldname": "check_all",
+   "fieldtype": "Button",
+   "label": "Check All"
+  },
+  {
+   "fieldname": "working_employee_bonus_",
+   "fieldtype": "Float",
+   "label": "Working Employee Bonus %",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wjvrr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "retired_employee_bonus_",
+   "fieldtype": "Float",
+   "label": "Retired Employee Bonus %",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_break_fjaz0",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_wk89c",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "component_details",
+   "fieldtype": "Table",
+   "label": "Component Details",
+   "options": "Component Details"
+  },
+  {
+   "fieldname": "employee_list",
+   "fieldtype": "Table",
+   "label": "Employee List",
+   "options": "EB Employee List"
+  },
+  {
+   "fieldname": "bonus_calculation",
+   "fieldtype": "Table",
+   "label": "Bonus Calculation",
+   "options": "EB Bonus Amount Calculation"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Employee Bonus",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "get_bonus",
+   "fieldtype": "Button",
+   "label": "Get Bonus"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Branch",
+   "options": "Branch",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-03-12 14:33:18.547490",
+ "modified_by": "Administrator",
+ "module": "Allowance",
+ "name": "Employee Bonus",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "format:{season_name}",
+ "creation": "2024-03-15 13:11:57.575525",
+ "default_view": "List",
+ "description": "**Fiscal Year** represents a Financial Year. All accounting entries and other major transactions are tracked against **Fiscal Year**.",
+ "doctype": "DocType",
+ "document_type": "Setup",
+ "engine": "InnoDB",
+ "field_order": [
+  "season_name",
+  "season_start_date",
+  "column_break_fo49d",
+  "company",
+  "season_end_date",
+  "column_break_5iiyp",
+  "branch",
+  "column_break_jknsn",
+  "enable",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "season_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Season Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "season_start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Season Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_fo49d",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "season_end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Season End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_5iiyp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_jknsn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "1",
+   "fieldname": "enable",
+   "fieldtype": "Check",
+   "label": "Enable",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Season For Payroll",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "icon": "fa fa-calendar",
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-03-20 11:31:15.872617",
+ "modified_by": "Administrator",
+ "module": "Allowance",
+ "name": "Season For Payroll",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "show_name_in_global_search": 1,
+ "sort_field": "name",
+ "sort_order": "DESC",
+ "states": []
+}

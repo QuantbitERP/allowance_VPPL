@@ -1,0 +1,13 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Salary Slip",
+  "enabled": 1,
+  "modified": "2024-03-19 17:08:00.362878",
+  "module": null,
+  "name": "Salary Slip- Retention Days",
+  "script": "frappe.ui.form.on('Salary Slip', {\n    refresh: function(frm) {\n        if(frm.doc.start_date && frm.doc.end_date && frm.doc.salary_structure)\n        {\n            frappe.call({\n                method: \"allowance.allowance.doctype.add_retention_days.get_retention\",\n                args: {\n                    start_date:frm.doc.start_date,\n                    end_date:frm.doc.end_date,\n                    employee_name:frm.doc.employee\n                },\n                callback: function(response) {\n                    if (!response.exc) {\n                        frm.set_value('retention_days', response.message);\n                    } \n                }\n            });\n        }\n    }\n});",
+  "view": "Form"
+ }
+]
