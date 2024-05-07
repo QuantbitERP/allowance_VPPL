@@ -1,7 +1,4 @@
 ## Allowance
+Allowance Calculation for Sugar
 
-Petrol Medical Retension Allowance
-
-#### License
-
-Dev-MrAbhi
+#### License to QUANTBIT TECHNOLOGIES #########
