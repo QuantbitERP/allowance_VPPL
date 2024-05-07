@@ -1,0 +1,114 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-08-23 15:07:28.144528",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "from_date",
+  "basic_c",
+  "hra_c",
+  "personal_pay_c",
+  "fixed_allowance_c",
+  "dearness_allowance_c",
+  "medical_allowance_c",
+  "petrol_allowance",
+  "p_allowance_in_amount",
+  "maintenance_amount",
+  "bhatta_amount",
+  "special_allowance",
+  "telephone_bhatta"
+ ],
+ "fields": [
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "basic_c",
+   "fieldtype": "Currency",
+   "label": "Basic"
+  },
+  {
+   "default": "0",
+   "fieldname": "hra_c",
+   "fieldtype": "Currency",
+   "label": "HRA"
+  },
+  {
+   "default": "0",
+   "fieldname": "personal_pay_c",
+   "fieldtype": "Currency",
+   "label": "Personal Pay"
+  },
+  {
+   "default": "0",
+   "fieldname": "fixed_allowance_c",
+   "fieldtype": "Currency",
+   "label": "Fixed allowance"
+  },
+  {
+   "default": "0",
+   "fieldname": "dearness_allowance_c",
+   "fieldtype": "Currency",
+   "label": "Dearness Allowance"
+  },
+  {
+   "default": "0",
+   "fieldname": "medical_allowance_c",
+   "fieldtype": "Currency",
+   "label": "Medical Allowance"
+  },
+  {
+   "fieldname": "petrol_allowance",
+   "fieldtype": "Float",
+   "label": "Petroll Allowance",
+   "precision": "2"
+  },
+  {
+   "fieldname": "p_allowance_in_amount",
+   "fieldtype": "Float",
+   "label": "P Allowance In Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "maintenance_amount",
+   "fieldtype": "Float",
+   "label": "Maintanace Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "bhatta_amount",
+   "fieldtype": "Float",
+   "label": "Bhatta Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "special_allowance",
+   "fieldtype": "Float",
+   "label": "Special Allowance",
+   "precision": "2"
+  },
+  {
+   "fieldname": "telephone_bhatta",
+   "fieldtype": "Float",
+   "label": "Telephone Bhatta",
+   "precision": "2"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-05-07 10:39:39.344455",
+ "modified_by": "Administrator",
+ "module": "Allowance",
+ "name": "Employee Payroll",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

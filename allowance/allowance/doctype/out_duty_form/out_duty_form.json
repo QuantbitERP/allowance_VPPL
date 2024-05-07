@@ -133,7 +133,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-03-18 17:37:26.141593",
+ "modified": "2024-05-05 13:30:21.461687",
  "modified_by": "Administrator",
  "module": "Allowance",
  "name": "Out Duty Form",
@@ -141,6 +141,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,

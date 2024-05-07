@@ -23,12 +23,15 @@ def round_val(allo):
 class AllowanceCalculation(Document):
 	@frappe.whitelist() 
 	def get_Details(self):
+		# frappe.throw("hiii")
 		if(not self.branch):
 			frappe.throw("Please Select the Branch")
 		if(not self.company):
 			frappe.throw("Please Select the Company")
 		emp = frappe.db.get_all("Employee",fields=["name", "last_name", "middle_name", "first_name", "employee_name", "designation","grade"],filters={"company":self.company,"branch":self.branch,"status":"Active"})		
+		# frappe.throw(str(emp))
 		for i in emp:
+			# frappe.throw(str(i))
 			temp=str(self.date)
 			lst=temp.split('-')
 			year=int(lst[0])
@@ -40,6 +43,7 @@ class AllowanceCalculation(Document):
 			present_days=frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': ['in', ['Present', 'Work From Home']],'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})  
 			half_days = frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': 'Half Day','attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})  
 			half_days=half_days*0.5
+			# frappe.throw(str(half_days))
 			present_days=present_days+half_days
 			present_days_list=frappe.get_all('Attendance', {
 				'status': ['in', ['Present', 'Work From Home','Half Day']],'docstatus':1,'company':self.company,
@@ -47,7 +51,10 @@ class AllowanceCalculation(Document):
 				'employee': i.name,
 				"retation_status":'Not'
 			}, ["attendance_date"])
-			retension_days = frappe.db.count('Attendance', {'status': 'Present','docstatus':1,'company':self.company,'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'On Retation','out_duty_status':'Not'}) 
+			# frappe.throw(str(present_days_list))
+
+			retension_days = frappe.db.count('Attendance', {'status': 'Present','docstatus':1,'company':self.company,'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'On Retation','custom_out_duty_status':'Not'}) 
+			# frappe.throw(str(retension_days))
 			retension_amt_basic = retension_amt_medi = retension_amt_hra  =retension_amt_da=retension_amt_fixed=retension_amt_personal_pay=0
 			from_date = datetime.datetime.strptime(self.from_date, '%Y-%m-%d').date()
 			basic_c = hra_c = personal_pay_c = fixed_allowance_c = dearness_allowance_c = medical_allowance_c = petrol_allowance = p_allowance_in_amount=petrol_amt= 0
@@ -58,7 +65,7 @@ class AllowanceCalculation(Document):
 				FROM `tabEmployee Payroll` 
 				WHERE parent = '{0}' ORDER BY from_date DESC
 			""".format(i.name), as_dict=True)
-
+			# frappe.throw(str(employee_payroll_li))
 			if employee_payroll_li:
 				for p in employee_payroll_li:
 					if( p["from_date"]):
@@ -80,6 +87,7 @@ class AllowanceCalculation(Document):
 			if employee_payroll_li:
 				#Below code for retention calculation
 				retention_percentage=frappe.get_value("Employee Grade",{"name":i.grade},"retention_percentage")
+				# frappe.throw(str(retention_percentage))
 				if(retention_percentage):
 					retension_amt_basic=(((float(basic_c)/date)*retension_days)*retention_percentage)/100
 					retension_amt_medi=(((medical_allowance_c/date)*retension_days)*retention_percentage)/100
@@ -137,7 +145,7 @@ class AllowanceCalculation(Document):
 						WHERE docstatus = 1 
 						AND employee = '{0}' 
 						AND company = '{1}' 
-						AND out_duty_status = 'On Out Duty' 
+						AND custom_out_duty_status = 'On Out Duty' 
 						AND status IN ('Present', 'Half Day') 
 						AND attendance_date BETWEEN '{2}' AND '{3}'
 					""".format(i.name, self.company, self.from_date, self.date), as_dict=True)
@@ -150,8 +158,8 @@ class AllowanceCalculation(Document):
 											on_season_out_duty_half_day+=1
 										else:
 											on_season_out_duty_present_days+=1
-					out_duty_count = frappe.db.count('Attendance', {'out_duty_status':'On Out Duty','docstatus':1,'status': 'Present','attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not',"company":self.company})  #,"retation_status":'Not'
-					half_day_out_duty = frappe.db.count('Attendance', {'out_duty_status':'On Out Duty','docstatus':1,'status': 'Half Day','attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not',"company":self.company})  #,"retation_status":'Not'
+					out_duty_count = frappe.db.count('Attendance', {'custom_out_duty_status':'On Out Duty','docstatus':1,'status': 'Present','attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not',"company":self.company})  #,"retation_status":'Not'
+					half_day_out_duty = frappe.db.count('Attendance', {'custom_out_duty_status':'On Out Duty','docstatus':1,'status': 'Half Day','attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not',"company":self.company})  #,"retation_status":'Not'
 					half_day_out_duty=half_day_out_duty*0.5
 					out_duty_count=out_duty_count+half_day_out_duty
      
@@ -275,7 +283,8 @@ class AllowanceCalculation(Document):
 					"start_date":self.from_date,
 					"end_date":self.date
 				},)
-    
+		# frappe.msgprint(str(present_days))
+
 	@frappe.whitelist()
 	def get_month_dates(self,input_date):
 		selected_date = str(input_date)
