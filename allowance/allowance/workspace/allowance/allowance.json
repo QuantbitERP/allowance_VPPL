@@ -17,15 +17,16 @@
    "is_query_report": 0,
    "label": "Allowance",
    "link_count": 6,
+   "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
   },
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Petrol Allowance",
+   "label": "Allowance Calculation",
    "link_count": 0,
-   "link_to": "Petrol Allowance",
+   "link_to": "Allowance Calculation",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -33,9 +34,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "HRA and Medical Allowance",
+   "label": "Petrol Allowance",
    "link_count": 0,
-   "link_to": "HRA and Medical Allowance",
+   "link_to": "Petrol Allowance",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -81,8 +82,8 @@
    "type": "Link"
   }
  ],
- "modified": "2023-07-25 15:49:27.360059",
- "modified_by": "sayali@erpdata.in",
+ "modified": "2024-04-29 15:28:27.593945",
+ "modified_by": "tejal.kumbhar@erpdata.in",
  "module": "Allowance",
  "name": "Allowance",
  "number_cards": [],

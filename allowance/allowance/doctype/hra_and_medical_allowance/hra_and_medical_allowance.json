@@ -1,0 +1,88 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:HRA-MA - {date} - {####}",
+ "creation": "2023-06-01 14:14:25.279462",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "hra_and_medical_allowance_section",
+  "from_date",
+  "get_details",
+  "column_break_mymbp",
+  "date",
+  "hra_and_medical_allowance_details_section",
+  "hra_and_medical_allowance_details",
+  "calculate_payroll"
+ ],
+ "fields": [
+  {
+   "fieldname": "hra_and_medical_allowance_section",
+   "fieldtype": "Section Break",
+   "label": "HRA and Medical Allowance "
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "get_details",
+   "fieldtype": "Button",
+   "label": "Get Details"
+  },
+  {
+   "fieldname": "column_break_mymbp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "hra_and_medical_allowance_details_section",
+   "fieldtype": "Section Break",
+   "label": "HRA and Medical Allowance Details"
+  },
+  {
+   "fieldname": "hra_and_medical_allowance_details",
+   "fieldtype": "Table",
+   "label": "HRA and Medical Allowance Details",
+   "options": "HRA and Medical Allowance Details"
+  },
+  {
+   "fieldname": "calculate_payroll",
+   "fieldtype": "Button",
+   "label": "Checking"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-14 13:43:13.401037",
+ "modified_by": "Administrator",
+ "module": "Allowance",
+ "name": "HRA and Medical Allowance",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

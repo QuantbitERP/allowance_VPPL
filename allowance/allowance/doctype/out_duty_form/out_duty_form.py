@@ -54,7 +54,7 @@ class OutDutyForm(Document):
 				doc.employee= self.labour_id
 				doc.status=self.status
 				doc.attendance_date=start_date.date()
-				doc.out_duty_status="On Out Duty"
+				doc.custom_out_duty_status="On Out Duty"
 				doc.company=self.company
 				doc.docstatus=1
 				doc.retation_status="Not"

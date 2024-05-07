@@ -217,7 +217,10 @@ fixtures = [
      {
         "doctype": "Salary Component",
         "filters": [
-            ["name", "in", ["Basic","Fixed Allowance","Dearness Allowance"]]
+            ["name", "in", ["Basic","Fixed Allowance","Dearness Allowance",
+                            "Telephone Bhatta","Special Allowance","HRA Deduction Amount","Bhatta Amount",
+                            "Maintenance Amount","Bonus Amount","Overtime Amount","Medical Allowance",
+                            "Insurance","Personal Pay","Petrol Allowance"]]
         ]
     },
       {
@@ -225,6 +228,13 @@ fixtures = [
         "filters": [
             ["name", "in", ["Salary Slip- Retention Days"]]
         ]
+    },
+     {
+        "doctype": "Workspace",
+        "filters": [
+            ["name", "in", ["VPPL Allowance"]]
+        ]
     }
+
 ]
 
