@@ -91,7 +91,7 @@
  "icon": "fa fa-calendar",
  "is_submittable": 1,
  "links": [],
- "modified": "2024-05-05 12:57:07.131121",
+ "modified": "2024-05-08 12:51:01.764492",
  "modified_by": "Administrator",
  "module": "Allowance",
  "name": "Season For Payroll",
@@ -99,6 +99,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,

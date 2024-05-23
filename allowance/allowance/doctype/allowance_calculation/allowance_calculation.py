@@ -38,23 +38,29 @@ class AllowanceCalculation(Document):
 			month=int(lst[1])
 			date=int(lst[2])
 			count=0
+			leave_days =0
 			present_days=0
+			half_days_leave =0
 			retension_days=half_days=0
 			present_days=frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': ['in', ['Present', 'Work From Home']],'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})  
 			half_days = frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': 'Half Day','attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})  
-			half_days=half_days*0.5
+			leave_days=frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': ['in', ['On Leave']],'leave_type': ['!=', 'Leave Without Pay'],'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})
+			half_days_leave = frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': 'Half Day','leave_type': ['!=', 'Leave Without Pay'],'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})
+			half_days=(half_days)*0.5
+			half_days_leave=(half_days_leave)*0.5
 			# frappe.throw(str(half_days))
-			present_days=present_days+half_days
+			present_days=present_days+half_days+leave_days+half_days_leave
+			# frappe.throw(str(present_days))
 			present_days_list=frappe.get_all('Attendance', {
 				'status': ['in', ['Present', 'Work From Home','Half Day']],'docstatus':1,'company':self.company,
 				'attendance_date': ['between', [self.from_date, self.date]],
 				'employee': i.name,
 				"retation_status":'Not'
 			}, ["attendance_date"])
-			# frappe.throw(str(present_days_list))
+			# frappe.throw(str(present_days_list))                           
 
 			retension_days = frappe.db.count('Attendance', {'status': 'Present','docstatus':1,'company':self.company,'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'On Retation','custom_out_duty_status':'Not'}) 
-			# frappe.throw(str(retension_days))
+			# frappe.throw(str(retension_days))           i.name  
 			retension_amt_basic = retension_amt_medi = retension_amt_hra  =retension_amt_da=retension_amt_fixed=retension_amt_personal_pay=0
 			from_date = datetime.datetime.strptime(self.from_date, '%Y-%m-%d').date()
 			basic_c = hra_c = personal_pay_c = fixed_allowance_c = dearness_allowance_c = medical_allowance_c = petrol_allowance = p_allowance_in_amount=petrol_amt= 0
