@@ -31,7 +31,7 @@ class AllowanceCalculation(Document):
 		emp = frappe.db.get_all("Employee",fields=["name", "last_name", "middle_name", "first_name", "employee_name", "designation","grade"],filters={"company":self.company,"branch":self.branch,"status":"Active"})		
 		# frappe.throw(str(emp))
 		for i in emp:
-			# frappe.throw(str(i))
+			# frappe.throw(str(i.name))
 			temp=str(self.date)
 			lst=temp.split('-')
 			year=int(lst[0])
@@ -115,7 +115,11 @@ class AllowanceCalculation(Document):
 				num_days=out_duty_count=half_day_out_duty=0
 				num_days=calendar.monthrange(int(year), int(month))[1]
 				season_list=frappe.get_all("Season For Payroll",{"enable":True,"docstatus":1,"branch":self.branch,"company":self.company},["season_start_date","season_end_date"])
-				if(i.designation=="FIELD MAN" or i.designation=="SLIP BOY" or i.designation=="AGRI.OVERSIER"):
+				
+				# if(i.designation=="FIELD MAN" or i.designation=="SLIP BOY" or i.designation=="AGRI.OVERSIER"):
+				petrol_all_details = frappe.get_value("Petrol Allowance Designation Details",{'parent':"Petrol Allowance Designation",'designation':i.designation},"petrol_allowance")
+				# frappe.throw(str(petrol_all_details))
+				if petrol_all_details:
 					petrol_rate=0
 					temp=str(self.from_date)
 					date_li=temp.split('-')
@@ -140,7 +144,9 @@ class AllowanceCalculation(Document):
 						off_season_present_days=present_days-on_season_present_days
 				if(designation):
 					petrol_liter_amt=0
-					if(i.designation=="FIELD MAN" or i.designation=="AGRI.OVERSIER"):
+					# frappe.throw(str(petrol_all_details)+"=====")
+					# if(i.designation=="FIELD MAN" or i.designation=="AGRI.OVERSIER"):
+					if petrol_all_details == "Petrol In Ltr":
 						petrol_liter_amt=petrol_allowance
 					else:
 						petrol_liter_amt=p_allowance_in_amount
@@ -183,24 +189,35 @@ class AllowanceCalculation(Document):
 					if(off_season_out_duty_present_days and all_days_out_duty):	
 						off_season_present_days=off_season_present_days-off_season_out_duty_present_days
 					if(all_days_out_duty):
-						if(i.designation=="FIELD MAN"):
-							season_per,off_season_per=frappe.get_value("Designation",{'name':"FIELD MAN"},["season_rate","off_season_rate"])
+						if(petrol_all_details == "Petrol In Ltr"):
+							season_per,off_season_per=frappe.get_value("Designation",{'name':i.designation},["season_rate","off_season_rate"])
 							if(on_season_present_days):
 								petrol_amt=petrol_amt+(((petrol_liter_amt*season_per*petrol_rate)/(100*num_days))*(on_season_present_days))
 							if(off_season_present_days):
 								petrol_amt=petrol_amt+(((petrol_liter_amt*off_season_per*petrol_rate)/(100*num_days))*(off_season_present_days))
-						elif(i.designation=="AGRI.OVERSIER"):
-							season_per,off_season_per=frappe.get_value("Designation",{'name':"AGRI.OVERSIER"},["season_rate","off_season_rate"])
-							if(on_season_present_days):
-								petrol_amt=petrol_amt+(((petrol_liter_amt*season_per*petrol_rate)/(100*num_days))*(on_season_present_days))
-							if(off_season_present_days):
-								petrol_amt=petrol_amt+(((petrol_liter_amt*off_season_per*petrol_rate)/(100*num_days))*(off_season_present_days))
+						# if(i.designation=="FIELD MAN"):
+						# 	season_per,off_season_per=frappe.get_value("Designation",{'name':"FIELD MAN"},["season_rate","off_season_rate"])
+						# 	if(on_season_present_days):
+						# 		petrol_amt=petrol_amt+(((petrol_liter_amt*season_per*petrol_rate)/(100*num_days))*(on_season_present_days))
+						# 	if(off_season_present_days):
+						# 		petrol_amt=petrol_amt+(((petrol_liter_amt*off_season_per*petrol_rate)/(100*num_days))*(off_season_present_days))
+						# elif(i.designation=="AGRI.OVERSIER"):
+						# 	season_per,off_season_per=frappe.get_value("Designation",{'name':"AGRI.OVERSIER"},["season_rate","off_season_rate"])
+						# 	if(on_season_present_days):
+						# 		petrol_amt=petrol_amt+(((petrol_liter_amt*season_per*petrol_rate)/(100*num_days))*(on_season_present_days))
+						# 	if(off_season_present_days):
+						# 		petrol_amt=petrol_amt+(((petrol_liter_amt*off_season_per*petrol_rate)/(100*num_days))*(off_season_present_days))
 						else:
-							season_per,off_season_per=frappe.get_value("Designation",{'name':"SLIP BOY"},["season_rate","off_season_rate"])
+							season_per,off_season_per=frappe.get_value("Designation",{'name':i.designation},["season_rate","off_season_rate"])
 							if(on_season_present_days):
 								petrol_amt=((petrol_liter_amt*season_per)/(100*num_days))*(on_season_present_days)
 							if(off_season_present_days):
 								petrol_amt=((petrol_liter_amt*off_season_per)/(100*num_days))*(off_season_present_days)
+							# season_per,off_season_per=frappe.get_value("Designation",{'name':"SLIP BOY"},["season_rate","off_season_rate"])
+							# if(on_season_present_days):
+							# 	petrol_amt=((petrol_liter_amt*season_per)/(100*num_days))*(on_season_present_days)
+							# if(off_season_present_days):
+							# 	petrol_amt=((petrol_liter_amt*off_season_per)/(100*num_days))*(off_season_present_days)
 																																																																				
 				#below code is used to calculate HRA Deduction amount
 				self_to_date = datetime.datetime.strptime(str(self.date), "%Y-%m-%d").date()
