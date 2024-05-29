@@ -32,6 +32,7 @@ class AllowanceCalculation(Document):
 		# frappe.throw(str(emp))
 		for i in emp:
 			# frappe.throw(str(i.name))
+
 			temp=str(self.date)
 			lst=temp.split('-')
 			year=int(lst[0])
@@ -41,24 +42,31 @@ class AllowanceCalculation(Document):
 			leave_days =0
 			present_days=0
 			half_days_leave =0
+			petrol_leave_days =0
 			retension_days=half_days=0
+
 			present_days=frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': ['in', ['Present', 'Work From Home']],'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})  
 			half_days = frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': 'Half Day','attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})  
 			leave_days=frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': ['in', ['On Leave']],'leave_type': ['!=', 'Leave Without Pay'],'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})
 			half_days_leave = frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': 'Half Day','leave_type': ['!=', 'Leave Without Pay'],'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})
+
 			half_days=(half_days)*0.5
+			# half_days_leave=half_days_all_leave-half_days_leave
 			half_days_leave=(half_days_leave)*0.5
-			# frappe.throw(str(half_days))
-			present_days=present_days+half_days+leave_days+half_days_leave
+			# frappe.msgprint(str(half_days))
+			present_days=present_days+half_days
+			total_leave_days=leave_days+half_days_leave
 			# frappe.throw(str(present_days))
 			present_days_list=frappe.get_all('Attendance', {
 				'status': ['in', ['Present', 'Work From Home','Half Day']],'docstatus':1,'company':self.company,
 				'attendance_date': ['between', [self.from_date, self.date]],
 				'employee': i.name,
 				"retation_status":'Not'
-			}, ["attendance_date"])
+			}, ["attendance_date","status"])
 			# frappe.throw(str(present_days_list))                           
-
+			petrol_leave_days=frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': ['in', ['On Leave']],'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})
+			# petrol_half_days = frappe.db.count('Attendance', {'docstatus':1,'company':self.company,'status': 'Half Day','attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not'})
+			
 			retension_days = frappe.db.count('Attendance', {'status': 'Present','docstatus':1,'company':self.company,'attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'On Retation','custom_out_duty_status':'Not'}) 
 			# frappe.throw(str(retension_days))           i.name  
 			retension_amt_basic = retension_amt_medi = retension_amt_hra  =retension_amt_da=retension_amt_fixed=retension_amt_personal_pay=0
@@ -108,17 +116,16 @@ class AllowanceCalculation(Document):
 				#Below Program is for calculate petrol allowance
 				on_season_present_days=0
 				on_season_half_days=0
-				off_season_present_days=0
 				on_season_out_duty_present_days=0
+				off_season_present_days=0
+				off_season_half_days = 0
 				off_season_out_duty_present_days=0
 				designation=False
 				num_days=out_duty_count=half_day_out_duty=0
 				num_days=calendar.monthrange(int(year), int(month))[1]
 				season_list=frappe.get_all("Season For Payroll",{"enable":True,"docstatus":1,"branch":self.branch,"company":self.company},["season_start_date","season_end_date"])
-				
-				# if(i.designation=="FIELD MAN" or i.designation=="SLIP BOY" or i.designation=="AGRI.OVERSIER"):
 				petrol_all_details = frappe.get_value("Petrol Allowance Designation Details",{'parent':"Petrol Allowance Designation",'designation':i.designation},"petrol_allowance")
-				# frappe.throw(str(petrol_all_details))
+				# frappe.throw(str(season_list))
 				if petrol_all_details:
 					petrol_rate=0
 					temp=str(self.from_date)
@@ -132,27 +139,35 @@ class AllowanceCalculation(Document):
 						petrol_rate=0
 					designation=True
 					if(season_list):
+						# frappe.throw(str(present_days_list))
 						for k in season_list:
 							for m in present_days_list:
 								if(m.attendance_date>=k.season_start_date and m.attendance_date<=k.season_end_date):
+									# frappe.throw(str(m.status))
 									if(m.status=="Half Day"):
 										on_season_half_days+=1
 									else:
 										on_season_present_days+=1
+
+							# frappe.msgprint(str(on_season_present_days)+" " +str(on_season_half_days))
+				
 						on_season_half_days=on_season_half_days*0.5
+						# frappe.throw(str(on_season_half_days))
 						on_season_present_days=on_season_present_days+on_season_half_days
+						# frappe.throw(str(on_season_present_days))
 						off_season_present_days=present_days-on_season_present_days
+						# frappe.throw(str(off_season_present_days))
 				if(designation):
-					petrol_liter_amt=0
-					# frappe.throw(str(petrol_all_details)+"=====")
+					petrol_liter_amt=petrol_liter_qty=0
+					# frappe.throw(str(petrol_all_details)+"=====")petrol_leave_days
 					# if(i.designation=="FIELD MAN" or i.designation=="AGRI.OVERSIER"):
 					if petrol_all_details == "Petrol In Ltr":
-						petrol_liter_amt=petrol_allowance
+						petrol_liter_qty=petrol_allowance
 					else:
 						petrol_liter_amt=p_allowance_in_amount
 					on_season_out_duty_half_day=0
 					out_duty_li = frappe.db.sql("""
-						SELECT attendance_date, name 
+						SELECT attendance_date, name ,status
 						FROM `tabAttendance` 
 						WHERE docstatus = 1 
 						AND employee = '{0}' 
@@ -161,10 +176,13 @@ class AllowanceCalculation(Document):
 						AND status IN ('Present', 'Half Day') 
 						AND attendance_date BETWEEN '{2}' AND '{3}'
 					""".format(i.name, self.company, self.from_date, self.date), as_dict=True)
+					
 					if(out_duty_li): 
+						# frappe.throw(str(out_duty_li))
 						if(season_list):
 							for k in season_list:
 								for od in out_duty_li:
+									
 									if(od.attendance_date>=k.season_start_date and od.attendance_date<=k.season_end_date):
 										if(od.status=="Half Day"):
 											on_season_out_duty_half_day+=1
@@ -174,51 +192,50 @@ class AllowanceCalculation(Document):
 					half_day_out_duty = frappe.db.count('Attendance', {'custom_out_duty_status':'On Out Duty','docstatus':1,'status': 'Half Day','attendance_date': ["between", [self.from_date, self.date]],"employee":i.name,"retation_status":'Not',"company":self.company})  #,"retation_status":'Not'
 					half_day_out_duty=half_day_out_duty*0.5
 					out_duty_count=out_duty_count+half_day_out_duty
-     
+					# frappe.throw(str(out_duty_count)+"==="+str(present_days))          ,"name":'HR-EMP-00088'
 					on_season_out_duty_half_day=on_season_out_duty_half_day*0.5
 					on_season_out_duty_present_days=on_season_out_duty_present_days+on_season_out_duty_half_day
 					off_season_out_duty_present_days=out_duty_count-on_season_out_duty_present_days
-     
+					# frappe.throw(str(off_season_out_duty_present_days))
+
+					# If all out duty days petrol allowance not applicable
 					all_days_out_duty=True
 					if(out_duty_count>=present_days):
 						petrol_amt=0
 						all_days_out_duty=False
 	
-					if(on_season_out_duty_present_days and all_days_out_duty):	
+					if(on_season_out_duty_present_days and all_days_out_duty):
+						# frappe.msgprint(str(on_season_present_days)+"==="+str(on_season_out_duty_present_days))	
 						on_season_present_days=on_season_present_days-on_season_out_duty_present_days
 					if(off_season_out_duty_present_days and all_days_out_duty):	
 						off_season_present_days=off_season_present_days-off_season_out_duty_present_days
 					if(all_days_out_duty):
+						# frappe.throw(str("hii"))
+						# frappe.msgprint(str(on_season_present_days)+"==="+str(off_season_present_days))	
 						if(petrol_all_details == "Petrol In Ltr"):
+							# frappe.msgprint(str(off_season_present_days))
+						
 							season_per,off_season_per=frappe.get_value("Designation",{'name':i.designation},["season_rate","off_season_rate"])
 							if(on_season_present_days):
-								petrol_amt=petrol_amt+(((petrol_liter_amt*season_per*petrol_rate)/(100*num_days))*(on_season_present_days))
+								petrol_amt=petrol_amt+(((petrol_liter_qty*season_per*petrol_rate)/(100*num_days))*(on_season_present_days))
+								# frappe.throw(str(petrol_amt))
+								# frappe.msgprint(str("on season  ")+str(on_season_present_days))
 							if(off_season_present_days):
-								petrol_amt=petrol_amt+(((petrol_liter_amt*off_season_per*petrol_rate)/(100*num_days))*(off_season_present_days))
-						# if(i.designation=="FIELD MAN"):
-						# 	season_per,off_season_per=frappe.get_value("Designation",{'name':"FIELD MAN"},["season_rate","off_season_rate"])
-						# 	if(on_season_present_days):
-						# 		petrol_amt=petrol_amt+(((petrol_liter_amt*season_per*petrol_rate)/(100*num_days))*(on_season_present_days))
-						# 	if(off_season_present_days):
-						# 		petrol_amt=petrol_amt+(((petrol_liter_amt*off_season_per*petrol_rate)/(100*num_days))*(off_season_present_days))
-						# elif(i.designation=="AGRI.OVERSIER"):
-						# 	season_per,off_season_per=frappe.get_value("Designation",{'name':"AGRI.OVERSIER"},["season_rate","off_season_rate"])
-						# 	if(on_season_present_days):
-						# 		petrol_amt=petrol_amt+(((petrol_liter_amt*season_per*petrol_rate)/(100*num_days))*(on_season_present_days))
-						# 	if(off_season_present_days):
-						# 		petrol_amt=petrol_amt+(((petrol_liter_amt*off_season_per*petrol_rate)/(100*num_days))*(off_season_present_days))
+								petrol_amt=petrol_amt+(((petrol_liter_qty*off_season_per*petrol_rate)/(100*num_days))*(off_season_present_days))
+								# frappe.throw(str(petrol_amt))
+								# frappe.msgprint(str("off season  ")+str(off_season_present_days))
 						else:
 							season_per,off_season_per=frappe.get_value("Designation",{'name':i.designation},["season_rate","off_season_rate"])
 							if(on_season_present_days):
-								petrol_amt=((petrol_liter_amt*season_per)/(100*num_days))*(on_season_present_days)
+								# frappe.throw("petrol_liter_amt = "+str(petrol_liter_amt)+" season_per= "+str(season_per)+" num_days= "+ str(num_days)+" on_season_present_days= "+str(on_season_present_days))
+								petrol_amt=petrol_amt+((petrol_liter_amt*season_per)/(100*num_days))*(on_season_present_days)
+							# frappe.msgprint(str("on season")+str(petrol_amt))
+								# frappe.throw(str(petrol_amt))
 							if(off_season_present_days):
-								petrol_amt=((petrol_liter_amt*off_season_per)/(100*num_days))*(off_season_present_days)
-							# season_per,off_season_per=frappe.get_value("Designation",{'name':"SLIP BOY"},["season_rate","off_season_rate"])
-							# if(on_season_present_days):
-							# 	petrol_amt=((petrol_liter_amt*season_per)/(100*num_days))*(on_season_present_days)
-							# if(off_season_present_days):
-							# 	petrol_amt=((petrol_liter_amt*off_season_per)/(100*num_days))*(off_season_present_days)
-																																																																				
+								petrol_amt=petrol_amt+((petrol_liter_amt*off_season_per)/(100*num_days))*(off_season_present_days)
+							# frappe.msgprint(str("off season")+str(petrol_amt))
+
+
 				#below code is used to calculate HRA Deduction amount
 				self_to_date = datetime.datetime.strptime(str(self.date), "%Y-%m-%d").date()
 				self_from_date = datetime.datetime.strptime(str(self.from_date), "%Y-%m-%d").date()
@@ -248,15 +265,15 @@ class AllowanceCalculation(Document):
 				#Below code content HRA Calculation
 				medical_allow=hra=hra_deduction=0
 				if(retension_days==0):
-					if(present_days>=20):
+					if((present_days+total_leave_days+out_duty_count)>=20):
 						medical_allow=medical_allowance_c
 						hra=hra_c
-					elif(present_days<=19):
-						medical_allow=((medical_allowance_c/date)*(present_days))
-						hra=((hra_c/date)*(present_days)) 
+					elif((present_days+total_leave_days+out_duty_count)<=19):
+						medical_allow=((medical_allowance_c/date)*(present_days+total_leave_days+out_duty_count))
+						hra=((hra_c/date)*(present_days+total_leave_days+out_duty_count)) 
 				else:
-					medical_allow=(((medical_allowance_c/date)*(present_days))+retension_amt_medi) if present_days!=0 else retension_amt_medi
-					hra=(((hra_c/date)*(present_days))+retension_amt_hra) if present_days!=0 else retension_amt_hra
+					medical_allow=(((medical_allowance_c/date)*(present_days+total_leave_days+out_duty_count))+retension_amt_medi) if (present_days+total_leave_days+out_duty_count)!=0 else retension_amt_medi
+					hra=(((hra_c/date)*(present_days+total_leave_days+out_duty_count))+retension_amt_hra) if (present_days+total_leave_days+out_duty_count)!=0 else retension_amt_hra
 				if(total_guest_house_days and hra and num_days):
 					hra_deduction=((hra/num_days)*total_guest_house_days)
 				#below code is used to add overtime amount for particular employee
@@ -267,32 +284,32 @@ class AllowanceCalculation(Document):
 				bonus_amt=frappe.get_value("EB Bonus Amount Calculation",{"employee_id":i.name,"from_date":self.from_date,"to_date":self.date,"docstatus":1},"total_bonus_amount")
 				#below code to calculate Additional Amount
 				if(maintenance_amount):
-					maintenance_amount=(maintenance_amount/num_days)*present_days
+					maintenance_amount=(maintenance_amount/num_days)*(present_days-out_duty_count)
 				if(bhatta_amount):
-					bhatta_amount=(bhatta_amount/num_days)*present_days
+					bhatta_amount=(bhatta_amount/num_days)*(present_days-out_duty_count)
 				if(special_allowance):
-					if(present_days>=15):
+					if((present_days+total_leave_days+out_duty_count)>=15):
 						special_allowance=special_allowance
 					else:
-						special_allowance=(special_allowance/num_days)*present_days
+						special_allowance=(special_allowance/num_days)*(present_days+total_leave_days+out_duty_count)
 				if(telephone_bhatta):
-					if(present_days>=15):
+					if((present_days+total_leave_days+out_duty_count)>=15):
 						telephone_bhatta=telephone_bhatta
 					else:
-						telephone_bhatta=(telephone_bhatta/num_days)*present_days
-      
+						telephone_bhatta=(telephone_bhatta/num_days)*(present_days+total_leave_days+out_duty_count)
+
 				self.append("hra_and_medical_allowance_details",
 				{
 					"employee": i.name,
 					"employee_name": i.employee_name,
 					"grade": i.grade,
 					"retention_days":retension_days,
-					"basic":((float(basic_c)/date)*(present_days))+retension_amt_basic if present_days!=0 else retension_amt_basic,
+					"basic":((float(basic_c)/date)*(present_days+total_leave_days))+retension_amt_basic if (present_days+total_leave_days)!=0 else retension_amt_basic,
 					"medical_allowance":medical_allow,
 					"hra": hra,
-					"fixed_allowance": ((fixed_allowance_c/date)*(present_days))+retension_amt_fixed  if present_days!=0 else retension_amt_fixed,
-					"personal_pay":((float(personal_pay_c)/date)*(present_days))+retension_amt_personal_pay if present_days!=0 else retension_amt_personal_pay,
-					"dearness_allowance":((float(dearness_allowance_c)/date)*(present_days))+retension_amt_da if present_days!=0 else retension_amt_da,
+					"fixed_allowance": ((fixed_allowance_c/date)*(present_days+total_leave_days))+retension_amt_fixed  if (present_days+total_leave_days)!=0 else retension_amt_fixed,
+					"personal_pay":((float(personal_pay_c)/date)*(present_days+total_leave_days))+retension_amt_personal_pay if (present_days+total_leave_days)!=0 else retension_amt_personal_pay,
+					"dearness_allowance":((float(dearness_allowance_c)/date)*(present_days+total_leave_days))+retension_amt_da if (present_days+total_leave_days)!=0 else retension_amt_da,
 					"petrol_allowance":petrol_amt,
 					"overtime_value":overtime_amt,
 					"bonus_amount":bonus_amt,
